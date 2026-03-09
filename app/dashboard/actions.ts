@@ -203,9 +203,8 @@ export async function createSlot(formData: FormData) {
 }
  
 export async function deletePro(id: string) {
-  // Use the admin client to bypass RLS
-  const supabaseAdmin = createAdminClient();
-
+  // Use the admin client to bypass RLS 
+  const supabaseAdmin = await createClient();
   console.log("Admin attempting deletion of ID:", id);
 
   const { error } = await supabaseAdmin
