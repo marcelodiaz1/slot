@@ -74,8 +74,8 @@ export async function handleCreateBooking(prevState: any, formData: FormData) {
 if (!client_id || client_id === "" || client_id === "null") {
   // 1. Use Admin Client to bypass RLS
   const { createAdminClient } = await import("@/utils/supabase/admin");
-  const supabaseAdmin = createAdminClient();
-
+   
+const supabaseAdmin = await createAdminClient();
   // 2. Check if this email exists first (prevent duplicates)
   const { data: existingClient } = await supabaseAdmin
     .from('profiles')
@@ -175,8 +175,8 @@ if (client_id.includes(' ')) {
 
   if (isInvalidUuid) {
     const { createAdminClient } = await import("@/utils/supabase/admin");
-    const supabaseAdmin = createAdminClient();
-
+ 
+    const supabaseAdmin = await createAdminClient();
     // 1. Check if email already exists
     const { data: existing } = await supabaseAdmin
       .from('profiles')
